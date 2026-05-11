@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://xxejsflmusv0"]
+
+[ext_resource type="PackedScene" uid="uid://d1m77w05q4pfy" path="res://scenes/stage.tscn" id="1_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://t7xj8a5xtcp" path="res://scenes/game_manager.tscn" id="2_tipki"]
+[ext_resource type="Texture2D" uid="uid://5cti46xu10u8" path="res://assets/moon.png" id="3_85g3d"]
+[ext_resource type="Texture2D" uid="uid://b4m4lvjki1pfr" path="res://assets/sun.png" id="4_choun"]
+[ext_resource type="PackedScene" uid="uid://8pm7sip6g0es" path="res://scenes/player1.tscn" id="5_ya4ey"]
+[ext_resource type="Script" uid="uid://b5n4wbft80stl" path="res://scripts/player_ui.gd" id="6_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://ucabdyrsn7bt" path="res://scenes/high_level_ui.tscn" id="6_tipki"]
+[ext_resource type="Texture2D" uid="uid://ve4o770pxflk" path="res://assets/hp.png" id="7_trceg"]
+[ext_resource type="Texture2D" uid="uid://c7jxssf2yl7g3" path="res://assets/stamina.png" id="8_tipki"]
+[ext_resource type="Script" uid="uid://c1g12cc12wuaa" path="res://scripts/high_level_player_spawner.gd" id="9_choun"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_272bh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_85g3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_choun")
+}],
+"loop": true,
+"name": &"change",
+"speed": 5.0
+}]
+
+[node name="main" type="Node2D"]
+
+[node name="TileMapLayer" parent="." instance=ExtResource("1_o6xl0")]
+position = Vector2(569.00006, 301)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 326)
+
+[node name="GameManager" parent="." instance=ExtResource("2_tipki")]
+position = Vector2(17, -123)
+
+[node name="Time" type="AnimatedSprite2D" parent="GameManager"]
+texture_filter = 1
+position = Vector2(574.99994, 80)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_272bh")
+animation = &"change"
+frame_progress = 0.6498402
+
+[node name="Player1" parent="." instance=ExtResource("5_ya4ey")]
+position = Vector2(733, 192)
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 991.99994
+offset_top = -63.999992
+offset_right = 1032.0
+offset_bottom = -23.999992
+grow_horizontal = 0
+scale = Vector2(5, 5)
+script = ExtResource("6_eb6dy")
+
+[node name="Hearts" type="HBoxContainer" parent="PlayerUI"]
+layout_mode = 0
+offset_left = -0.40002438
+offset_top = 17.599998
+offset_right = 79.599976
+offset_bottom = 33.6
+scale = Vector2(0.5, 0.5)
+
+[node name="Heart1" type="TextureRect" parent="PlayerUI/Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_trceg")
+
+[node name="Heart2" type="TextureRect" parent="PlayerUI/Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_trceg")
+
+[node name="Heart3" type="TextureRect" parent="PlayerUI/Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_trceg")
+
+[node name="Heart4" type="TextureRect" parent="PlayerUI/Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_trceg")
+
+[node name="Stamina" type="HBoxContainer" parent="PlayerUI"]
+layout_mode = 0
+offset_top = 25.000002
+offset_right = 80.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Stamina1" type="TextureRect" parent="PlayerUI/Stamina"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_tipki")
+
+[node name="Stamina2" type="TextureRect" parent="PlayerUI/Stamina"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_tipki")
+
+[node name="Stamina3" type="TextureRect" parent="PlayerUI/Stamina"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_tipki")
+
+[node name="Stamina4" type="TextureRect" parent="PlayerUI/Stamina"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_tipki")
+
+[node name="HighLevelUI" parent="." instance=ExtResource("6_tipki")]
+offset_left = -366.0
+offset_top = -173.0
+offset_right = -366.0
+offset_bottom = -173.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://xxejsflmusv0")
+spawn_path = NodePath("..")
+script = ExtResource("9_choun")
+network_player = ExtResource("5_ya4ey")

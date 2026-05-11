@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://8pm7sip6g0es"]
+
+[ext_resource type="Texture2D" uid="uid://d0frea3dcxddg" path="res://assets/player1.png" id="1_pqb02"]
+[ext_resource type="Script" uid="uid://cfcx86lnytgrl" path="res://scripts/player1.gd" id="2_ytgb6"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qir2g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Area2D" type="Area2D"]
+texture_filter = 1
+script = ExtResource("2_ytgb6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(12, 22)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-13, -8, -12, -15, -8, -19, -4, -19, 0, -15, 1, -8, -6, -3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_pqb02")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qir2g")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
