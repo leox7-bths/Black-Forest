@@ -38,10 +38,6 @@ script = ExtResource("1_ya4ey")
 material = SubResource("ShaderMaterial_eb6dy")
 position = Vector2(569.00006, 301)
 
-[node name="Background" parent="." instance=ExtResource("1_o6xl0")]
-material = SubResource("ShaderMaterial_eb6dy")
-position = Vector2(569.00006, 301)
-
 [node name="HighlightLayer" parent="." instance=ExtResource("1_o6xl0")]
 position = Vector2(569.00006, 301)
 script = ExtResource("3_eb6dy")
